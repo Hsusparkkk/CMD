@@ -1,0 +1,11 @@
+body { font-family: Arial, sans-serif; line-height: 1.6; }
+pre { background-color: #f4f4f4; padding: 10px; border-left: 3px solid #ccc; }
+code { background-color: #f4f4f4; padding: 2px 4px; border-radius: 3px; }
+h1, h2 { color: #333; }
+.methodDiv { margin-bottom: 20px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+#mainbd{display: flex; align-items: center; flex-direction: column;}
+#mainbd .methodDiv{width:50%;background-color: #ddd;}
+#mainbd>h1{font-size:3em;text-align: center;width:100%;}
+#mainbd, body{background-color: #ccc;}
+pre{width:80%}
+::-webkit-scrollbar{display: none;}

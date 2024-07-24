@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to View, Change, Reset CMD Settings and Allow Script Execution</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    
+    <section id="mainbd">
+        <h1>How to View, Change, Reset CMD Settings and Allow Script Execution</h1>
+    <div class="methodDiv">
+        <h2>How to View CMD Settings</h2>
+        <ol>
+            <li><strong>View CMD Properties</strong>
+                <ul>
+                    <li>Open CMD: Press <code>Win + R</code>, type <code>cmd</code>, and press <code>Enter</code> to open the Command Prompt.</li>
+                    <li>Right-click on the CMD window title bar and select "Properties."</li>
+                    <li>In the "Properties" dialog, switch to the "Font" tab to view the current font and font size.</li>
+                </ul>
+            </li>
+            <li><strong>Check Registry Settings Using PowerShell</strong>
+                <ul>
+                    <li>Open PowerShell: Press <code>Win + X</code> and select "Windows PowerShell" or "Windows PowerShell (Admin)."</li>
+                    <li>Enter the following command to view CMD font settings:
+                        <pre><code>Get-ItemProperty -Path "HKCU:\Console\"</code></pre>
+                    </li>
+                </ul>
+            </li>
+            <li><strong>Check Registry Settings Using <code>reg query</code> Command</strong>
+                <ul>
+                    <li>Open CMD: Press <code>Win + R</code>, type <code>cmd</code>, and press <code>Enter</code> to open the Command Prompt.</li>
+                    <li>Enter the following commands to query CMD font settings:
+                        <pre><code>reg query "HKEY_CURRENT_USER\Console" /v FaceName
+reg query "HKEY_CURRENT_USER\Console" /v FontSize</code></pre>
+                    </li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+    <div class="methodDiv">
+        <h2>How to Change CMD Settings</h2>
+        <ol>
+            <li><strong>Manually Change CMD Properties</strong>
+                <ul>
+                    <li>Open CMD: Press <code>Win + R</code>, type <code>cmd</code>, and press <code>Enter</code> to open the Command Prompt.</li>
+                    <li>Right-click on the CMD window title bar and select "Properties."</li>
+                    <li>In the "Properties" dialog, switch to the "Font" tab, select the desired font and font size, then click "OK" to save changes.</li>
+                </ul>
+            </li>
+            <li><strong>Change CMD Settings Using PowerShell Script</strong>
+                <ul>
+                    <li>Open PowerShell: Press <code>Win + X</code> and select "Windows PowerShell" or "Windows PowerShell (Admin)."</li>
+                    <li>Write a PowerShell script to modify CMD settings:
+                        <pre><code># Define font settings
+$fontName = "Consolas"  # Change to your desired font name
+$fontSize = 16          # Change to your desired font size
+
+# Modify CMD settings in the registry
+$regPath = "HKCU:\Console\"
+Set-ItemProperty -Path $regPath -Name "FaceName" -Value $fontName
+Set-ItemProperty -Path $regPath -Name "FontSize" -Value $fontSize
+
+# Notify user to restart CMD
+Write-Output "Please close and reopen CMD to apply changes."</code></pre>
+                    </li>
+                    <li>Save the script as a <code>.ps1</code> file and execute it.</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+    <div class="methodDiv">
+        <h2>How to Reset CMD Settings</h2>
+        <ol>
+            <li><strong>Reset CMD Properties</strong>
+                <ul>
+                    <li>Open CMD: Press <code>Win + R</code>, type <code>cmd</code>, and press <code>Enter</code> to open the Command Prompt.</li>
+                    <li>Right-click on the CMD window title bar and select "Properties."</li>
+                    <li>In the "Properties" dialog, manually restore the settings to default values.</li>
+                </ul>
+            </li>
+            <li><strong>Reset Registry Settings Using PowerShell</strong>
+                <ul>
+                    <li>Use PowerShell to delete CMD registry settings:
+                        <pre><code>Remove-Item -Path "HKCU:\Console\" -Recurse -Force</code></pre>
+                    </li>
+                </ul>
+            </li>
+            <li><strong>Or, Reset Registry Settings Using CMD Command</strong>
+                <ul>
+                    <li>Use CMD command to delete CMD registry settings:
+                        <pre><code>reg delete "HKCU\Console" /f</code></pre>
+                    </li>
+                    <li>Restart CMD to apply changes.</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+    <div class="methodDiv">
+        <h2>Allow PowerShell Script Execution</h2>
+        <ol>
+            <li><strong>Open PowerShell</strong>
+                <ul>
+                    <li>Press <code>Win + X</code> and select "Windows PowerShell" or "Windows PowerShell (Admin)."</li>
+                </ul>
+            </li>
+            <li><strong>Allow Script Execution</strong>
+                <ul>
+                    <li>Enter the following command to allow script execution:
+                        <pre><code>Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</code></pre>
+                    </li>
+                    <li>The system will prompt for confirmation. Type <code>Y</code> and press <code>Enter</code>.</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+</section>
+</body>
+</html>
